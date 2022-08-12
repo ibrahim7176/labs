@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PostSeedere extends Seeder
+class PostSeeder extends Seeder
 {
     /**
      * Run the database seeds.
