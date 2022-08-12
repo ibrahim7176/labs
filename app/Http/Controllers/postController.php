@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class postController extends Controller
 {
@@ -38,7 +39,7 @@ class postController extends Controller
     public function store(Request $request)
     {
         $post =  post::create(
-            ['title' => $request->input('title'), 'body' => $request->input('body'), 'enabled' => $request->input('enabled')]
+            ['title' => $request->input('title'), 'body' => $request->input('body'), 'enabled' => $request->input('enabled'), 'user_id' => $request->input('user_id')]
         );
 
 

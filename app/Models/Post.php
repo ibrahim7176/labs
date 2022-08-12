@@ -15,6 +15,7 @@ class Post extends Model
         'title',
         'body',
         'enabled',
+        'user_id'
     ];
 
     public function user()

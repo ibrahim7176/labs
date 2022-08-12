@@ -1,3 +1,4 @@
+{{-- @extends('layouts.navigation') --}}
 @extends('layout.app')
 @section('title', 'List User')
 

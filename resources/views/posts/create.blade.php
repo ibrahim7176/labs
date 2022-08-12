@@ -20,6 +20,10 @@
       <label  class="p-2"  class="p-2">enabled</label>
       <input type="text" name="enabled" placeholder="on or off" >
     </div>
+    <div class="form-group p-2">
+      <label  class="p-2"  class="p-2">user_id</label>
+      <input type="number" name="user_id" placeholder="add your id" >
+    </div>
     
     <button type="submit" class="btn  btn-primary">Submit</button>
   </form>
