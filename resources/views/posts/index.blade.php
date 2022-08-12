@@ -9,6 +9,7 @@
         <th scope="col">#</th>
         <th scope="col">title</th>
         <th scope="col">body</th>
+        <th scope="col">author</th>
         <th scope="col">enabled</th>
         <th scope="col">Actions</th>
       </tr>
@@ -20,6 +21,7 @@
             <th scope="row">{{$post['id']}}</th>
             <td ><a href="{{route('posts.show' , ['id' =>$post['id'] ])}}">{{$post['title']}}</a></td>
             <td>{{$post['body']}}</td>
+            <td>{{$post->user->name}}</td>
             <td>{{$post['enabled']}}</td>
             <td>
                 

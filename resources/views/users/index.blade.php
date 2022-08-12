@@ -9,7 +9,7 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <th scope="col">password</th>
+        <th scope="col">posts count</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -20,7 +20,7 @@
             <th scope="row">{{$user['id']}}</th>
             <td ><a href="{{route('users.show' , ['id' =>$user['id'] ])}}">{{$user['name']}}</a></td>
             <td>{{$user['email']}}</td>
-            <td>{{$user['password']}}</td>
+            <td>{{$user->posts_count}}</td>
             <td>
                 
                 <form class="d-inline" action="{{route('users.edit' , ['id' => $user['id']])}}" method="GET">
