@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidatedData;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
 
 class postController extends Controller
@@ -36,16 +40,17 @@ class postController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidatedData $request)
     {
+
+        $image = $request->file('image')->store('images', 'public');
         $post =  post::create(
-            ['title' => $request->input('title'), 'body' => $request->input('body'), 'enabled' => $request->input('enabled'), 'user_id' => $request->input('user_id')]
+            ['title' => $request->input('title'), 'body' => $request->input('body'), 'enabled' => $request->input('enabled'), 'user_id' => $request->input('user_id'), 'image' => $image]
         );
-
-
 
         return redirect()->route('posts.index')->with(['post' => $post]);
     }
+
 
     /**
      * Display the specified resource.
@@ -57,6 +62,7 @@ class postController extends Controller
     {
         $post = Post::find($id);
         if (!$post) return 'not found';
+
         return view('posts.show')->with(['post' => $post]);
     }
 
@@ -68,8 +74,13 @@ class postController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
-        return view('posts.edit')->with(['post' => $post]);
+
+        if (Post::find($id)->user_id === auth()->user()->id) {
+            $post = Post::find($id);
+            return view('posts.edit')->with(['post' => $post]);
+        } else {
+            return "<h1>you are not post author</h1>";
+        }
     }
 
     /**
@@ -81,11 +92,12 @@ class postController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $post = Post::find($id)->update(
-            ['title' => $request->input('title'), 'body' => $request->input('body'), 'enabled' => $request->input('enabled')]
-        );
-        return redirect()->route('posts.index')->with(['post' => $post]);
+        if (Post::find($id)->user_id === auth()->user()->id) {
+            $post = Post::find($id)->update(
+                ['title' => $request->input('title'), 'body' => $request->input('body'), 'enabled' => $request->input('enabled')]
+            );
+            return redirect()->route('posts.index')->with(['post' => $post]);
+        }
     }
 
     /**

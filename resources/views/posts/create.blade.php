@@ -2,15 +2,20 @@
 @section('title', 'List User')
 
 @section('content')
-<form action="{{route('posts.store')}}" method="POST">
+<form action="{{route('posts.store')}}" method="POST" enctype="multipart/form-data" >
 
     @csrf
-
+    @error('title')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
     <div class="form-group p-2">
       <label class="p-2" for="exampleInputEmail1">title</label>
       <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name">
     </div>
-    
+    <div class="form-group p-2">
+      <label for="image">Image</label>
+      <input type="file" name="image" id="image">
+    </div>
     <div class="form-group p-2">
       <label  class="p-2" for="exampleInputPassword1" class="p-2">body</label>
       <input type="text" name="body" class="form-control "  >
@@ -22,7 +27,7 @@
     </div>
     <div class="form-group p-2">
       <label  class="p-2"  class="p-2">user_id</label>
-      <input type="number" name="user_id" placeholder="add your id" >
+      <input type="number" name="user_id" placeholder="add your id" value="{{auth()->user()->id}}" >
     </div>
     
     <button type="submit" class="btn  btn-primary">Submit</button>

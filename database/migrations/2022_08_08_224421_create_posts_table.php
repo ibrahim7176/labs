@@ -24,6 +24,7 @@ return new class extends Migration
             // addforignkey
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->text('image', 200)->nullable();
         });
     }
 
